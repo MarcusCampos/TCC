@@ -24,7 +24,7 @@ end
 G = double(G);             
 I = 1 - G/255;          
 Ima = Gaus_filter(I,.5);
-if (k== 1)Ima = imgaussfilt(I, 15);end
+%if (k== 1)Ima = imgaussfilt(I, 15);end
  imdisp(Ima);
 %-----------edge map------------
 [Ima_x, Ima_y] = gradient(Ima);
@@ -50,7 +50,7 @@ global epixFirst;
 global epiyFirst;
 
  % alterei aqui o de .2 para 0.8
- %if k == 1
+ if k == 1
     [x1,y1]=ginput(1);
     [x2,y2]=ginput(1);
     [x3,y3]=ginput(1);
@@ -64,16 +64,16 @@ global epiyFirst;
     TTa = t;
     YYa=y;
     [x,y] = snakeinterp(x,y,1,0.2);
-%  else
-%       [x,y] = snakeinterp(XXa,YYa,1.5,0.05);
-% end
+  else
+       [x,y] = snakeinterp(XXa,YYa,1.5,0.05);
+ end
 
 hold on, 
 plot([x;x(1,1)],[y;y(1,1)],'r--','LineWidth',2);
 hold off,
 
 % snake deformation with circle-shape constraint
-for i=1:12        
+for i=1:20        
     [x,y] = snakedeform_Endocardium(x,y,.5,.8,0.8,1,2,px,py,5);
     [x,y] = snakeinterp(x,y,1,0.2);  %
     hold on
@@ -117,7 +117,7 @@ figure(1)
 tempx = x; %variavel para printar imagens finais - Endocardio
 tempy = y; %variavel para printar imagens finais - Endocardio
 control = 0;
-for i=1:10 
+for i=1:120 
     %maxium iteration 125
          if i>1 
              dify = tempy - y;
@@ -185,7 +185,7 @@ strgeral = 'EndoCardioSerg';
 stringnumer = num2str(k);
 fileNameFormat = '.jpg';
 stringNameFile = strcat(strgeral,stringnumer,fileNameFormat);
-%saveas(fig, fullfile(pathname, stringNameFile));
+saveas(fig, fullfile(pathname, stringNameFile));
 hold off 
 
 
@@ -198,25 +198,8 @@ strgeral = 'EpiCardioSerg';
 stringnumer = num2str(k);
 fileNameFormat = '.jpg';
 stringNameFile = strcat(strgeral,stringnumer,fileNameFormat);
-%saveas(fig,fullfile(pathname, stringNameFile));
-%for i = 1: sizeXendo
- %  plot([tempx;tempx(1,1)],[tempy;tempy(1,1)],'g','LineWidth',1);
-%    diffX = tempx(i,1) - centerX ;
-   % dX = centerX:+.0001:tempx(i,1);
- %   A = [centerX,tempx(i,1)];
-    %[diffeX,diffeY] = [A,B];
-   %b = linspace(A,B, diffX);
-%   dX = A:B;
-%   a = linspace(centerY,tempy(i,1), diffY);
-%   plot(A,B,'g','LineWidth',1);
-%end
-%title(['Final Segmentation Result - Selection Endocardio Preenchido,  iter = ' num2str(i*5)]);
-%strgeral = 'SegSelection';
-%stringnumer = /num2str(k);
-%fileNameFormat = '.jpg';
-%stringNameFile = strcat(strgeral,stringnumer,fileNameFormat);
-%saveas(fig, fullfile(pathname, stringNameFile));
-%hold off;
+saveas(fig,fullfile(pathname, stringNameFile));
+
 
 figure(k); 
 imdisp(G);
@@ -231,59 +214,16 @@ strgeral = 'Seg';
 stringnumer = num2str(k);
 fileNameFormat = '.jpg';
 stringNameFile = strcat(strgeral,stringnumer,fileNameFormat);
-%saveas(fig, fullfile(pathname, stringNameFile));
-
-% [filename,pathname] = uigetfile('*.jpg','open file');
-% fname = fullfile(pathname,filename);
-% file = dir(fullfile(pathname,'*.jpg'));
-% A = imread(fullfile(pathname, filename));
-% imcrop(A, [714.5 0.5 452 456]);
-% [filename,pathname] = uigetfile('*.jpg','open file');
-% fname = fullfile(pathname,filename);
-% file = dir(fullfile(pathname,'*.jpg'));
-% B = imread(fullfile(pathname, filename));
-% C = imfuse(A,B,'blend','Scaling','joint');
-% imshow(C);
+saveas(fig, fullfile(pathname, stringNameFile));
 hold off ;
 
  if k == 1
-     %
-%     limitx = max(x);
-%     limiy = max(y);
-%     minx= min(x);
-%     miny = min(y);
-%     diffx = limitx - x;
-%     diffy = limiy - y;
-%     newvectorX = minx:+1:limitx;
-%     newvectorY = miny:+1:limiy;
-%     plot([newvectorX;newvectorX(1,:)],[newvectorY;newvectorY(1,:)],'g','LineWidth',1);
-%     for i= 0:length(x)
-%         NumberNewPoints = 3;
-%         xvals = linspace(x(i,1), x(i+1,1), NumberNewPoints+2);
-%         yvals = linspace(y(i,1), y(i,1), NumberNewPoints+2);
-%         pts = [xvals(:), yvals(:)];
-%     end
-%     point1=[x,y];
-%     point2=[5 5 5];
-%     t=0:.01:1;
-%     C=repmat(point1,length(t),1)'+(point2-point1)'*t
-%     plot([x;x(1,1)],[y;y(1,1)],'g','LineWidth',1);
-%     hold off;
-%     figureNewp = figure; 
-%     hold on,
-%     index = miny
-%     newvectorX = minx:+1:limitx;
-%     newvectorY = miny:+1:limiy;
-%     %plot([newvectorX;newvectorX(1,:)],[newvectorY;newvectorY(1,:)],'g','LineWidth',1);
      endoxFirst = tempx;
      endoyFirst = tempy; 
      epixFirst = x; 
      epiyFirst =y;
      centerXFirst = centerX;
      centerYFirst = centerY;
-     %hold off;
-%  else 
-%       CompatorOfSegments(endoxFirst, endoyFirst,epixFirst, epiyFirst,tempx, tempy, x,y)
  end 
  if k == 2
     figureNew = figure; 
@@ -319,54 +259,4 @@ hold off ;
  end
 end
 
-A_clr = 'D:\pasa emergencial\Documentos\Faculdade\6°Semestre\7° Semestre\MICCAI\Algoritmo Segment\YUWEI algoritmo\Comparetor\SegSelection1.jpg'; % random image
-    B_clr = 'D:\pasa emergencial\Documentos\Faculdade\6°Semestre\7° Semestre\MICCAI\Algoritmo Segment\YUWEI algoritmo\Comparetor\SegSelection1.jpg'; % random image
-    A_bw = A_clr>thresh; % convert to B&W
-    B_bw = B_clr>thresh; % convert to B&W
-    idx = A_bw==B_bw;    % compare
-    idy = all(idx,3);    % R==G==B
-    out = sum(idy(:));   % count
-% figure1 = figure;
-% ax1 = axes('Parent',figure1);
-% ax2 = axes('Parent',figure1);
-% set(ax1,'Visible','off');
-% set(ax2,'Visible','off');
-% [a,map,alpha] = imread('D:\pasa emergencial\Documentos\Faculdade\6°Semestre\7° Semestre\MICCAI\Algoritmo Segment\YUWEI algoritmo\Comparetor\SegSelection1.jpg');
-% I = imshow(a,'Parent',ax2);
-% set(I,'AlphaData',alpha);
-% imshow('D:\pasa emergencial\Documentos\Faculdade\6°Semestre\7° Semestre\MICCAI\Algoritmo Segment\YUWEI algoritmo\Comparetor\Seg2.jpg','Parent',ax1);
-%{
-         if i>1 & control==1
-         dify = tempy - y;
-             difx = tempx - x; 
-             if all(dify < 2)
-                 [x1,y1]=ginput(1);
-                 [x2,y2]=ginput(1);
-                 t = 0:0.05:6.28;
-                 r=sqrt((x1-x2).^2+(y1-y2).^2);
-                 newSelectionX = x1+ r*cos(t);
-                 newSelectionY = y1 + r*sin(t);
-                 subx = newSelectionX;
-                 suby = newSelectionY;
-                 x = x(1:340, 1);
-                 y = y(1:340, 1);
-
-                [x,y] = snakeinterp(x,y,1,0.2);
-
-                f = NewEdgeMap(Ima, x,y); 
-                [u,v] = MyGVC(f, 30,30,.8,4.6); 
-                mag = sqrt(u.*u+v.*v);
-                px = u./(mag+1e-10); py = v./(mag+1e-10); =
-                X0=x;
-                Y0=y;
-
-                n = length(X0);
-                xc = mean(X0);
-                yc = mean(Y0);
-
-                r = sqrt( (X0 - repmat(xc,n,1)).^2.0 + (Y0 - repmat(yc,n,1)).^2.0 );
-                rbar = mean(r);
-             end
-        end
-    %}
 

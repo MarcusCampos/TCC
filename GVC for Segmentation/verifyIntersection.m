@@ -48,7 +48,7 @@ hold off;
 strgeral = 'Preenchido1';
 fileNameFormat = '.jpg';
 stringNameFile = strcat(strgeral,fileNameFormat);
-saveas(Fig, figure+stringNameFile);
+%saveas(Fig, figure);
 
 Fig2 = I2
 imshow(I2);
@@ -93,14 +93,14 @@ for i=1:1199
 end 
 hold off;
 strgeral = 'Preenchido2';
-stringnumer = num2str(k);
 fileNameFormat = '.jpg';
 stringNameFile = strcat(strgeral,fileNameFormat);
-saveas(Fig2, figure2+stringNameFile);
+%saveas(Fig2, figure2);
 
-I = imread(figure);
-I2 = imread(figure2);
-
+I = Fig;
+I2 = Fig2;
+intersec = 0;
+uniao = 0; 
 for i=1:1199
     for j =1 :898
         redValue = I(j, i, 1);
@@ -111,9 +111,15 @@ for i=1:1199
             greenValue2 = I2(j, i, 2);
             blueValue2 = I2(j, i, 3);
             if  (redValue == redValue2 && greenValue2== greenValue && blueValue == blueValue2)
-                N=N+1;
+                intersec = intersec +1;
+                uniao = uniao +1;
+            else 
+                uniao=uniao+1;
             end
         end
     end 
 end 
+overlapping = intersec/uniao;
+%https://www.researchgate.net/publication/280670971_Over-_and_Under-Segmentation_Evaluation_based_on_the_Segmentation_Covering_Measure
+underlapping = intersec/intersec+uniao;
 end
