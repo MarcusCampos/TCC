@@ -1,0 +1,100 @@
+
+%--read the input image
+
+path = 'C:\Users\marcu\Documents\Faculdade\6°Semestre\7° Semestre\MICCAI\Algoritmo Segment\YUWEI algoritmo\Automação';
+DIRs = dir(path);
+ListagemdeDiretorios = struct2cell(DIRs);
+
+%[filename,pathname] = uigetfile('*.jpg','open file');
+%fname = fullfile(pathname,filename);
+%file_name = table(f_name);
+%file = dir(fullfile(pathname,'*.jpg'));
+arquivoSemSegmentacao = dir(strcat(path,'\',ListagemdeDiretorios{1,3}));
+arquivoSegmentacao = dir(strcat(path,'\',ListagemdeDiretorios{1,4}));
+ListagemdeDiretoriosSEMSEG = struct2cell(arquivoSemSegmentacao);%
+ListagemdeDiretoriosComSEG = struct2cell(arquivoSegmentacao);%uso
+ResultadosSeg = strcat(path,'\Resultados'); % uso
+Seed = strcat(path,'\Seed');
+OkFolder = mkdir(ResultadosSeg)
+OkFolder = mkdir(Seed)
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P5', 'P5');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P6', 'P6');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P7', 'P7');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P8', 'P8');
+catch
+    lastwarn('');
+end
+
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P9', 'P9');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P10', 'P10');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P11', 'P11');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P12', 'P12');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P13', 'P13');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P14', 'P14');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P15', 'P15');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P16', 'P16');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P17', 'P17');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P18', 'P18');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P19', 'P19');
+catch
+    lastwarn('');
+end
+try
+  Run_Segmentation_byPasta(Seed, ResultadosSeg, ListagemdeDiretorios,path, 'P20', 'P17');
+catch
+    lastwarn('');
+end
